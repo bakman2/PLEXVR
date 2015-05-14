@@ -1,9 +1,10 @@
 <?php
 #URL requirements - local network only
-$PLEX_URL="http://10.0.0.2:32400";
+$PLEX_URL="http://10.0.0.9:32400";
+$PLEX_TOKEN="YOUR-PLEX-TOKEN"; # read docs on plex.tv
 $TRANSCODER=$PLEX_URL."/photo/:/transcode?width=900&height=600&url=";
-$LOCATION = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-$content = file_get_contents( $PLEX_URL . "/library/sections/1/all");
+$LOCATION = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]?X-Plex-Token=".$PLEX_TOKEN;
+$content = file_get_contents( $PLEX_URL . "/library/sections/1/all?X-Plex-Token=".$PLEX_TOKEN);
 
 
 
