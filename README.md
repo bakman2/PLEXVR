@@ -24,7 +24,7 @@ Edit **index.php** and modify the Plex server IP:
 $PLEX_URL="http://<plex server IP>:32400";
 ```
 
-Open Janus and create a new portal, open the PlexVT webserver url and enter the room.
+Open Janus and create a new portal, open the PlexVR webserver url and enter the room.
 Use Fly mode and fly/click on any thumbnail, enter the portal/room and click on the movie-screen to play.
 
 
