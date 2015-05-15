@@ -21,7 +21,7 @@ Nothing dynamic.
 #### How to use:
 Clone the repository somewhere on your webserver.
 
-Edit **index.php** and modify the Plex server IP and your Plex token:
+Edit **settings.php** and modify the Plex server IP and your Plex token:
 ```sh
 $PLEX_URL="http://<plex server IP>:32400";
 $PLEX_TOKEN="YOUR-PLEX-TOKEN";
