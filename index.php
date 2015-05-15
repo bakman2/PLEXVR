@@ -1,12 +1,11 @@
 <?php
 #URL requirements - local network only
-$PLEX_URL="http://10.0.0.9:32400";
-$PLEX_TOKEN="YOUR-PLEX-TOKEN"; # read docs on plex.tv
+require_once('settings.php');
 $TRANSCODER=$PLEX_URL."/photo/:/transcode?width=900&height=600&url=";
-$LOCATION = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]?X-Plex-Token=".$PLEX_TOKEN;
-$content = file_get_contents( $PLEX_URL . "/library/sections/1/all?X-Plex-Token=".$PLEX_TOKEN);
+$LOCATION = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+$content = file_get_contents( $PLEX_URL . "/library/sections/2/all?X-Plex-Token=".$PLEX_TOKEN);
 
-
+#echo $PLEX_URL . "/library/sections/2/all?X-Plex-Token=".$PLEX_TOKEN;
 
 $x=0.15; # multiply value for positions
 $y=0.15; # margin
@@ -74,6 +73,8 @@ if( $_GET["video"]=="" ){
 	echo "<AssetImage id='recent' src='assets/recent.jpg' ></AssetImage>";
 	echo "<AssetImage id='exit' src='assets/exit.jpg' ></AssetImage>";
 
+
+
 # parse xml
 foreach ($xml as $item){
 
@@ -95,7 +96,7 @@ foreach ($xml as $item){
 	}
 	# render all thumb and video assets
 	echo "<AssetImage id='img_".$id."' src='./cache/img_".$id.".jpg' ></AssetImage>\n";
-	echo "<AssetVideo id='vid_".$id."' src='". $PLEX_URL . $video."' sbs3d='true' ></AssetVideo>\n";
+	echo "<AssetVideo id='vid_".$id."' src='". $PLEX_URL . $video."&amp;X-Plex-Token=".$PLEX_TOKEN."' sbs3d='true' ></AssetVideo>\n";
 }
 
 echo "</Assets>";
@@ -109,7 +110,7 @@ echo "<Room   use_local_asset='room_plane' walk_speed='5.0' run_speed='10.0' pos
         $video=$item->Media->Part->attributes()->key;
         $setrotation = getrotation($count,$rowcounter);
 	
-		echo "<Link draw_glow='false' url='".$LOCATION."?video=".$PLEX_URL."".$video."&amp;title=".urlencode($title)."' draw_text='false' thumb_id='img_".$id."' $setrotation scale='3.300 3.800 1.000' title='".urlencode($title)."'/>\n";
+		echo "<Link draw_glow='false' url='".$LOCATION."?video=".$PLEX_URL.$video."&amp;title=".urlencode($title)."&amp;X-Plex-Token=".$PLEX_TOKEN."' draw_text='false' thumb_id='img_".$id."' $setrotation scale='3.300 3.800 1.000' title='".urlencode($title)."'/>\n";
 
 	$count++;
 
@@ -131,7 +132,7 @@ echo "<Room   use_local_asset='room_plane' walk_speed='5.0' run_speed='10.0' pos
 
 else # render video room
 	{
-	echo "<AssetVideo id='vid_id' src='". $_GET["video"] ."' />";
+	echo "<AssetVideo id='vid_id' src='". $_GET["video"] ."&amp;X-Plex-Token=".$PLEX_TOKEN."' />";
 	echo "<AssetImage id='play' src='assets/play.gif' />";
 	echo "</Assets>";
 	echo "<Room  use_local_asset='room_box_medium'  default_sounds='false' col='0.10 0 0' pos='0.00 0.00 -17.4' skybox_left_id='black' skybox_right_id='black' skybox_front_id='black' skybox_back_id='black' skybox_up_id='black' skybox_down_id='black'>\n";
