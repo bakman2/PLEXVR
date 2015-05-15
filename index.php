@@ -100,7 +100,7 @@ foreach ($xml as $item){
 }
 
 echo "</Assets>";
-echo "<Room   use_local_asset='room_plane' walk_speed='5.0' run_speed='10.0' pos='8.5 0.000 -33.800' xdir='.71 0 .71' ydir='0 1 0' zdir='-.71 0 .71'  near_dist='0.0025' far_dist='2000.0' col='.1 .1 .1' skybox_left_id='black' skybox_right_id='black' skybox_front_id='black' skybox_back_id='black' skybox_up_id='black' skybox_down_id='black'>\n";
+echo "<Room   use_local_asset='room_plane' walk_speed='5.0' run_speed='10.0' col='0 0 1' pos='5 0 5' fwd='1 0 0'  near_dist='0.0025' far_dist='2000.0' col='.1 .1 .1' skybox_left_id='black' skybox_right_id='black' skybox_front_id='black' skybox_back_id='black' skybox_up_id='black' skybox_down_id='black'>\n";
 	
 	# parse xml and generate faces/links with their position in the world
 	foreach ($xml as $item){
@@ -109,8 +109,8 @@ echo "<Room   use_local_asset='room_plane' walk_speed='5.0' run_speed='10.0' pos
         $id=$item->attributes()->ratingKey;
         $video=$item->Media->Part->attributes()->key;
         $setrotation = getrotation($count,$rowcounter);
-	
-		echo "<Link draw_glow='false' url='".$LOCATION."?video=".$PLEX_URL.$video."&amp;title=".urlencode($title)."&amp;X-Plex-Token=".$PLEX_TOKEN."' draw_text='false' thumb_id='img_".$id."' $setrotation scale='3.300 3.800 1.000' title='".urlencode($title)."'/>\n";
+		#echo $setrotation . "<br/>";
+		echo "<Link draw_glow='false' url='".$LOCATION."?video=".$PLEX_URL.$video."&amp;title=".urlencode($title)."&amp;X-Plex-Token=".$PLEX_TOKEN."' draw_text='false' thumb_id='img_".$id."' pos='".($count+40)." 1 ".($count-20)." ' xdir='-1 0 ".($count-20)."' ydir='0 1 0' zdir='0 0 -1' scale='3.300 3.800 1.000' title='".urlencode($title)."'/>\n";
 
 	$count++;
 
@@ -126,7 +126,7 @@ echo "<Room   use_local_asset='room_plane' walk_speed='5.0' run_speed='10.0' pos
 		if($count==60){break;}
 	}
 
-	echo "<Image id='plex_logo' pos='-8.1 17 -16.7' xdir='-.71 0 -.71' ydir='0 1 0' zdir='.71 0 -.71' scale='3.6 5.2 3' />";
+	echo "<Image id='plex_logo' pos='46 16 16' otate_deg_per_sec='10'/>";
 	echo "<Image id='exit' pos='8.5 3.6 -33.8' xdir='.71 0 .71' ydir='0 1 0' zdir='-.71 0 .71' scale='1 1 1' />";
 	}
 
