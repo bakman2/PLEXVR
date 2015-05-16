@@ -13,7 +13,7 @@ $count=0; #element counter
 $faces=30; # thumbnails per side
 $rowlength= 10;
 $rowcounter=1;
-
+$poscount=15;
 $axisposition = array
   (
   array(13,1), #front at position 1
@@ -110,23 +110,15 @@ echo "<Room   use_local_asset='room_plane' walk_speed='5.0' run_speed='10.0' col
         $video=$item->Media->Part->attributes()->key;
         $setrotation = getrotation($count,$rowcounter);
 		#echo $setrotation . "<br/>";
-		echo "<Link draw_glow='false' url='".$LOCATION."?video=".$PLEX_URL.$video."&amp;title=".urlencode($title)."&amp;X-Plex-Token=".$PLEX_TOKEN."' draw_text='false' thumb_id='img_".$id."' pos='".($count+40)." 1 ".($count-20)." ' xdir='-1 0 ".($count-20)."' ydir='0 1 0' zdir='0 0 -1' scale='3.300 3.800 1.000' title='".urlencode($title)."'/>\n";
+		echo "<Link draw_glow='false' url='".$LOCATION."?video=".$PLEX_URL.$video."&amp;title=".urlencode($title)."&amp;X-Plex-Token=".$PLEX_TOKEN."' draw_text='false' thumb_id='img_".$id."' pos='".$poscount." 0 -4 ' xdir='1 0 0' ydir='0 1 0' zdir='0 0 1' scale='3.300 3.800 1.000' title='".urlencode($title)."'/>\n";
 
 	$count++;
+	$poscount=$poscount+4;
+	if($count==60){break;}
 
-	if ($rowcounter==$rowlength)
-		{
-			$rowcounter=1;
-		}
-		else
-		{
-			$rowcounter++;
-		};
-
-		if($count==60){break;}
 	}
 
-	echo "<Image id='plex_logo' pos='46 17 -16.7' xdir='-.71 0 -.71' ydir='0 1 0' zdir='.71 0 -.71' scale='3.6 5.2 3' />";
+	echo "<Image id='plex_logo' pos='46 17 -1' xdir='0 0 1' ydir='0 1 0' zdir='-1 0 0' scale='3.6 5.2 3' />";
 	echo "<Image id='exit' pos='8.5 3.6 -33.8' xdir='.71 0 .71' ydir='0 1 0' zdir='-.71 0 .71' scale='1 1 1' />";
 	}
 
@@ -135,7 +127,7 @@ else # render video room
 	echo "<AssetVideo id='vid_id' src='". $_GET["video"] ."&amp;X-Plex-Token=".$PLEX_TOKEN."' />";
 	echo "<AssetImage id='play' src='assets/play.gif' />";
 	echo "</Assets>";
-	echo "<Room  use_local_asset='room_box_medium'  default_sounds='false' col='0.10 0 0' pos='0.00 0.00 -17.4' skybox_left_id='black' skybox_right_id='black' skybox_front_id='black' skybox_back_id='black' skybox_up_id='black' skybox_down_id='black'>\n";
+	echo "<Room  use_local_asset='room_box_medium'  default_sounds='false' col='0.10 0 0' pos='0.00 0.00 -17.4' skybox_left_id='skybox_left' skybox_right_id='black' skybox_front_id='black' skybox_back_id='black' skybox_up_id='black' skybox_down_id='black'>\n";
 	echo "<Video id='vid_id' pos='0.2 3.8 -0.2'  scale='10.000 10.000 10.000' xdir='-1.00 0.00 -0.00' ydir='0.00 1.00 0.00' zdir='0.00 0.00 -1.00' thumb_id='play' />";
 	echo "<Text pos='11 3.4 -17.600' scale='2.500 2.200 1.000' xdir='-0.00 0.00 1.00' ydir='0.00 1.00 0.00' zdir='-1.00 0.00 -0.00'>". $_GET["title"] ."</Text>";
 }
