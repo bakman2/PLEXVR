@@ -68,8 +68,7 @@ echo "<Room   use_local_asset='room_plane' walk_speed='5.0' run_speed='10.0' col
         $title=$item->attributes()->title;
         $id=$item->attributes()->ratingKey;
         $video=$item->Media->Part->attributes()->key;
-        $setrotation = getrotation($count,$rowcounter);
-		#echo $setrotation . "<br/>";
+        
 		echo "<Link draw_glow='false' url='".$LOCATION."?video=".$PLEX_URL.$video."&amp;title=".urlencode($title)."&amp;X-Plex-Token=".$PLEX_TOKEN."' draw_text='false' thumb_id='img_".$id."' pos='".$poscount." 0 -4 ' xdir='1 0 0' ydir='0 1 0' zdir='0 0 1' scale='3.300 3.800 1.000' title='".urlencode($title)."'/>\n";
 
 	$count++;
