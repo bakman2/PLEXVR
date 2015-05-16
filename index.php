@@ -75,8 +75,8 @@ echo "<Room   use_local_asset='room_plane' walk_speed='5.0' run_speed='10.0' col
 
 	}
 
-	echo "<Image id='plex_logo' pos='46 17 -1' xdir='0 0 1' ydir='0 1 0' zdir='-1 0 0' scale='3.6 5.2 3' />";
-	echo "<Image id='exit' pos='8.5 3.6 -33.8' xdir='.71 0 .71' ydir='0 1 0' zdir='-.71 0 .71' scale='1 1 1' />";
+	echo "<Image id='plex_logo' pos='46 17 -1' xdir='0 0 1' ydir='0 1 0' zdir='-1 0 0' scale='3.6 5.2 3'/>";
+	echo "<Image id='exit' pos='5 3.1 5' xdir='0 0 -1' ydir='0 1 0' zdir='1 0 0' scale='1 1 1' />";
 	}
 
 else # render video room
