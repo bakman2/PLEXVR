@@ -3,52 +3,12 @@
 require_once('settings.php');
 $TRANSCODER=$PLEX_URL."/photo/:/transcode?width=900&height=600&url=";
 $LOCATION = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-$content = file_get_contents( $PLEX_URL . "/library/sections/2/all?X-Plex-Token=".$PLEX_TOKEN);
+$content = file_get_contents( $PLEX_URL . "/library/sections/".$SECTIONID."/all?X-Plex-Token=".$PLEX_TOKEN);
 
-#echo $PLEX_URL . "/library/sections/2/all?X-Plex-Token=".$PLEX_TOKEN;
-
-$x=0.15; # multiply value for positions
-$y=0.15; # margin
 $count=0; #element counter
-$faces=30; # thumbnails per side
-$rowlength= 10;
 $rowcounter=1;
 $poscount=15;
-$axisposition = array
-  (
-  array(13,1), #front at position 1
-  array(0,1),  #right at position 1
-  );
 
-
-function getrotation($loopposition,$rowcounter){
-	$frontface = array("17 1 0 "," 13 1 0 "," 9 1 0 "," 5 1 0 "," 1 1 0 "," -3 1 0 "," -7 1 0 "," -11 1 0 "," -15 1 0 "," -19 1 0 "," 17 5.6 0 "," 13 5.6 0 "," 9 5.6 0 "," 5 5.6 0 "," 1 5.6 0 "," -3 5.6 0 "," -7 5.6 0 "," -11 5.6 0 "," -15 5.6 0 "," -19 5.6 0 "," 17 10.2 0 "," 13 10.2 0 "," 9 10.2 0 "," 5 10.2 0 "," 1 10.2 0 "," -3 10.2 0 "," -7 10.2 0 "," -11 10.2 0 "," -15 10.2 0 "," -19 10.2 0 ");
-	$rightface = array( " -22 1 -2.5 "," -22 1 -6.5 "," -22 1 -10.5 "," -22 1 -14.5 "," -22 1 -18.5 "," -22 1 -22.5 "," -22 1 -26.5 "," -22 1 -30.5 "," -22 1 -34.5 "," -22 1 -38.5 "," -22 5.6 -2.5 "," -22 5.6 -6.5 "," -22 5.6 -10.5 "," -22 5.6 -14.5 "," -22 5.6 -18.5 "," -22 5.6 -22.5 "," -22 5.6 -26.5 "," -22 5.6 -30.5 "," -22 5.6 -34.5 "," -22 5.6 -38.5 "," -22 10.2 -2.5 "," -22 10.2 -6.5 "," -22 10.2 -10.5 "," -22 10.2 -14.5 "," -22 10.2 -18.5 "," -22 10.2 -22.5 "," -22 10.2 -26.5 "," -22 10.2 -30.5 "," -22 10.2 -34.5 "," -22 10.2 -38.5 ");
-	
-	#cube vector array
-	$axisrotation = array
-	  (
-	  array(-1,0,0,0,1,0,0,0,-1), #front
-	  array(0,0,-1,0,1,0,1,0,0),  #right
-	  );
-
-	
-	if($loopposition>=0 && $loopposition<=29 ){ # front
-		$horizontalposition = "pos='". $frontface[$loopposition] . "'";
-	 	$newposition = $horizontalposition . " xdir='". $axisrotation[0][0] . " " . $axisrotation[0][1] . " " . $axisrotation[0][2] ."' ydir='". $axisrotation[0][3] . " " . $axisrotation[0][4] . " " . $axisrotation[0][5] . "' zdir='". $axisrotation[0][6] . " " . $axisrotation[0][7] . " " . $axisrotation[0][8] . "'"; 
-	}
-	if($loopposition>=30 && $loopposition<60 ){ # right
-		$horizontalposition = "pos='". $rightface[$loopposition-30] . "'";
-	 	$newposition = $horizontalposition . " xdir='". $axisrotation[1][0] . " " . $axisrotation[1][1] . " " . $axisrotation[1][2] ."' ydir='". $axisrotation[1][3] . " " . $axisrotation[1][4] . " " . $axisrotation[1][5] . "' zdir='". $axisrotation[1][6] . " " . $axisrotation[1][7] . " " . $axisrotation[1][8] . "'"; 
-	}
-
-	return $newposition;
-
-
-}
-
-#xdir='0 0 -1' ydir='0 1 0' zdir='1 0 0
-#http://ip:32400/photo/:/transcode?width=1280&height=720&url=http%3a%2f%2f127%2e0%2e0%2e1%3a32400%2flibrary%2fmetadata%2f267%2fart%3ft%3d1334557392
 
 if (empty($content)) {
     die("XML is empty");
