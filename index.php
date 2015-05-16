@@ -5,10 +5,8 @@ $TRANSCODER=$PLEX_URL."/photo/:/transcode?width=900&height=600&url=";
 $LOCATION = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 $content = file_get_contents( $PLEX_URL . "/library/sections/".$SECTIONID."/all?X-Plex-Token=".$PLEX_TOKEN);
 
-$count=0; #element counter
 $rowcounter=1;
 $poscount=15;
-
 
 if (empty($content)) {
     die("XML is empty");
@@ -86,7 +84,7 @@ else # render video room
 	echo "<AssetVideo id='vid_id' src='". $_GET["video"] ."&amp;X-Plex-Token=".$PLEX_TOKEN."' />";
 	echo "<AssetImage id='play' src='assets/play.gif' />";
 	echo "</Assets>";
-	echo "<Room  use_local_asset='room_box_medium'  default_sounds='false' col='0.10 0 0' pos='0.00 0.00 -17.4' skybox_left_id='skybox_left' skybox_right_id='black' skybox_front_id='black' skybox_back_id='black' skybox_up_id='black' skybox_down_id='black'>\n";
+	echo "<Room  use_local_asset='room_box_medium'  default_sounds='false' col='0.10 0 0' pos='0.00 0.00 -17.4' skybox_left_id='black' skybox_right_id='black' skybox_front_id='black' skybox_back_id='black' skybox_up_id='black' skybox_down_id='black'>\n";
 	echo "<Video id='vid_id' pos='0.2 3.8 -0.2'  scale='10.000 10.000 10.000' xdir='-1.00 0.00 -0.00' ydir='0.00 1.00 0.00' zdir='0.00 0.00 -1.00' thumb_id='play' />";
 	echo "<Text pos='11 3.4 -17.600' scale='2.500 2.200 1.000' xdir='-0.00 0.00 1.00' ydir='0.00 1.00 0.00' zdir='-1.00 0.00 -0.00'>". $_GET["title"] ."</Text>";
 }
